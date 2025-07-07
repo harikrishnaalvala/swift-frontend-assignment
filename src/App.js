@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import Dashboard from './components/Dashboard';
+import Profile from './components/Profile';
+import './styles/App.css';
 
-function App() {
+const App = () => {
+  const [currentScreen, setCurrentScreen] = useState('dashboard');
+  const [user, setUser] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [userRes, commentsRes] = await Promise.all([
+          fetch('https://jsonplaceholder.typicode.com/users'),
+          fetch('https://jsonplaceholder.typicode.com/comments')
+        ]);
+        const users = await userRes.json();
+        const allComments = await commentsRes.json();
+        setUser(users[0]);
+        setComments(allComments);
+      } catch (e) {
+        console.error('Fetch error:', e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+       <div className="App">
+      <div className="loading-screen">
+        <div className="loader"></div>
+        <p className="loading-text">Loading application...</p>
+      </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+ 
+  
+    currentScreen === 'dashboard' ? (
+    <Dashboard comments={comments} onViewProfile={() => setCurrentScreen('profile')} />
+  ) : (
+    <Profile user={user} onBack={() => setCurrentScreen('dashboard')} />
+  )
+
+
+)
+};
 
 export default App;
