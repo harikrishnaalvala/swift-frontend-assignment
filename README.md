@@ -2,19 +2,17 @@
 
 A React-based dashboard application that displays a paginated, searchable, and sortable comments table, along with a read-only user profile view. This project focuses on UI design, data handling, custom pagination, and client-side state persistence.
 
-## Getting Started
-# Clone the repo
+1. Clone the Repository
 
-git clone https://github.com/yourusername/react-comments-dashboard.git
+git clone https://github.com/your-username/react-comments-dashboard.git
 
 cd react-comments-dashboard
 
-# Install dependencies
+2. Install Dependencies
 
 npm install
-
-# Start the development server
+3. Run the App
 
 npm start
 
-Visit http://localhost:3000 in your browser.
+The app will be available at http://localhost:3000
