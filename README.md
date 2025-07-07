@@ -4,13 +4,14 @@ A React-based dashboard application that displays a paginated, searchable, and s
 
 1. Clone the Repository
 
-git clone https://github.com/your-username/react-comments-dashboard.git
+// git clone https://github.com/your-username/swift-frontend-assignment.git
 
-cd react-comments-dashboard
+cd swift-frontend-assignment
 
 2. Install Dependencies
 
 npm install
+
 3. Run the App
 
 npm start
